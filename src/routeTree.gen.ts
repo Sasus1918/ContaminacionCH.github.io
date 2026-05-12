@@ -9,9 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as MetodologiaRouteImport } from './routes/metodologia'
 import { Route as MarcoNormativoRouteImport } from './routes/marco-normativo'
 import { Route as IndexRouteImport } from './routes/index'
 
+const MetodologiaRoute = MetodologiaRouteImport.update({
+  id: '/metodologia',
+  path: '/metodologia',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MarcoNormativoRoute = MarcoNormativoRouteImport.update({
   id: '/marco-normativo',
   path: '/marco-normativo',
@@ -26,31 +32,42 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/marco-normativo': typeof MarcoNormativoRoute
+  '/metodologia': typeof MetodologiaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/marco-normativo': typeof MarcoNormativoRoute
+  '/metodologia': typeof MetodologiaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/marco-normativo': typeof MarcoNormativoRoute
+  '/metodologia': typeof MetodologiaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/marco-normativo'
+  fullPaths: '/' | '/marco-normativo' | '/metodologia'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/marco-normativo'
-  id: '__root__' | '/' | '/marco-normativo'
+  to: '/' | '/marco-normativo' | '/metodologia'
+  id: '__root__' | '/' | '/marco-normativo' | '/metodologia'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   MarcoNormativoRoute: typeof MarcoNormativoRoute
+  MetodologiaRoute: typeof MetodologiaRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/metodologia': {
+      id: '/metodologia'
+      path: '/metodologia'
+      fullPath: '/metodologia'
+      preLoaderRoute: typeof MetodologiaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/marco-normativo': {
       id: '/marco-normativo'
       path: '/marco-normativo'
@@ -71,6 +88,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   MarcoNormativoRoute: MarcoNormativoRoute,
+  MetodologiaRoute: MetodologiaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
