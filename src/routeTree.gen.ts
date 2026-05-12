@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ResultadosRouteImport } from './routes/resultados'
 import { Route as MetodologiaRouteImport } from './routes/metodologia'
 import { Route as MarcoNormativoRouteImport } from './routes/marco-normativo'
 import { Route as IndexRouteImport } from './routes/index'
 
+const ResultadosRoute = ResultadosRouteImport.update({
+  id: '/resultados',
+  path: '/resultados',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MetodologiaRoute = MetodologiaRouteImport.update({
   id: '/metodologia',
   path: '/metodologia',
@@ -33,34 +39,45 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/marco-normativo': typeof MarcoNormativoRoute
   '/metodologia': typeof MetodologiaRoute
+  '/resultados': typeof ResultadosRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/marco-normativo': typeof MarcoNormativoRoute
   '/metodologia': typeof MetodologiaRoute
+  '/resultados': typeof ResultadosRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/marco-normativo': typeof MarcoNormativoRoute
   '/metodologia': typeof MetodologiaRoute
+  '/resultados': typeof ResultadosRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/marco-normativo' | '/metodologia'
+  fullPaths: '/' | '/marco-normativo' | '/metodologia' | '/resultados'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/marco-normativo' | '/metodologia'
-  id: '__root__' | '/' | '/marco-normativo' | '/metodologia'
+  to: '/' | '/marco-normativo' | '/metodologia' | '/resultados'
+  id: '__root__' | '/' | '/marco-normativo' | '/metodologia' | '/resultados'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   MarcoNormativoRoute: typeof MarcoNormativoRoute
   MetodologiaRoute: typeof MetodologiaRoute
+  ResultadosRoute: typeof ResultadosRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/resultados': {
+      id: '/resultados'
+      path: '/resultados'
+      fullPath: '/resultados'
+      preLoaderRoute: typeof ResultadosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/metodologia': {
       id: '/metodologia'
       path: '/metodologia'
@@ -89,6 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   MarcoNormativoRoute: MarcoNormativoRoute,
   MetodologiaRoute: MetodologiaRoute,
+  ResultadosRoute: ResultadosRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
