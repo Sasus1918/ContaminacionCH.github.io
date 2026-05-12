@@ -10,7 +10,7 @@ const NAV = [
   { to: "/conclusiones", label: "Conclusiones" },
 ] as const;
 
-export function SiteLayout() {
+export function SiteLayout({ children }: { children?: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
 
