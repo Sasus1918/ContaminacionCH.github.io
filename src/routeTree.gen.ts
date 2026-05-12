@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ResultadosRouteImport } from './routes/resultados'
 import { Route as MetodologiaRouteImport } from './routes/metodologia'
 import { Route as MarcoNormativoRouteImport } from './routes/marco-normativo'
+import { Route as AnalisisRouteImport } from './routes/analisis'
 import { Route as IndexRouteImport } from './routes/index'
 
 const ResultadosRoute = ResultadosRouteImport.update({
@@ -29,6 +30,11 @@ const MarcoNormativoRoute = MarcoNormativoRouteImport.update({
   path: '/marco-normativo',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AnalisisRoute = AnalisisRouteImport.update({
+  id: '/analisis',
+  path: '/analisis',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -37,12 +43,14 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/analisis': typeof AnalisisRoute
   '/marco-normativo': typeof MarcoNormativoRoute
   '/metodologia': typeof MetodologiaRoute
   '/resultados': typeof ResultadosRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/analisis': typeof AnalisisRoute
   '/marco-normativo': typeof MarcoNormativoRoute
   '/metodologia': typeof MetodologiaRoute
   '/resultados': typeof ResultadosRoute
@@ -50,20 +58,33 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/analisis': typeof AnalisisRoute
   '/marco-normativo': typeof MarcoNormativoRoute
   '/metodologia': typeof MetodologiaRoute
   '/resultados': typeof ResultadosRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/marco-normativo' | '/metodologia' | '/resultados'
+  fullPaths:
+    | '/'
+    | '/analisis'
+    | '/marco-normativo'
+    | '/metodologia'
+    | '/resultados'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/marco-normativo' | '/metodologia' | '/resultados'
-  id: '__root__' | '/' | '/marco-normativo' | '/metodologia' | '/resultados'
+  to: '/' | '/analisis' | '/marco-normativo' | '/metodologia' | '/resultados'
+  id:
+    | '__root__'
+    | '/'
+    | '/analisis'
+    | '/marco-normativo'
+    | '/metodologia'
+    | '/resultados'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AnalisisRoute: typeof AnalisisRoute
   MarcoNormativoRoute: typeof MarcoNormativoRoute
   MetodologiaRoute: typeof MetodologiaRoute
   ResultadosRoute: typeof ResultadosRoute
@@ -92,6 +113,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MarcoNormativoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/analisis': {
+      id: '/analisis'
+      path: '/analisis'
+      fullPath: '/analisis'
+      preLoaderRoute: typeof AnalisisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -104,6 +132,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AnalisisRoute: AnalisisRoute,
   MarcoNormativoRoute: MarcoNormativoRoute,
   MetodologiaRoute: MetodologiaRoute,
   ResultadosRoute: ResultadosRoute,
