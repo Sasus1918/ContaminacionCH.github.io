@@ -9,8 +9,44 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ResultadosRouteImport } from './routes/resultados'
+import { Route as MetodologiaRouteImport } from './routes/metodologia'
+import { Route as MarcoNormativoRouteImport } from './routes/marco-normativo'
+import { Route as ConclusionesRouteImport } from './routes/conclusiones'
+import { Route as AnalisisRouteImport } from './routes/analisis'
 import { Route as IndexRouteImport } from './routes/index'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResultadosRoute = ResultadosRouteImport.update({
+  id: '/resultados',
+  path: '/resultados',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MetodologiaRoute = MetodologiaRouteImport.update({
+  id: '/metodologia',
+  path: '/metodologia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarcoNormativoRoute = MarcoNormativoRouteImport.update({
+  id: '/marco-normativo',
+  path: '/marco-normativo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConclusionesRoute = ConclusionesRouteImport.update({
+  id: '/conclusiones',
+  path: '/conclusiones',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnalisisRoute = AnalisisRouteImport.update({
+  id: '/analisis',
+  path: '/analisis',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +55,116 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/analisis': typeof AnalisisRoute
+  '/conclusiones': typeof ConclusionesRoute
+  '/marco-normativo': typeof MarcoNormativoRoute
+  '/metodologia': typeof MetodologiaRoute
+  '/resultados': typeof ResultadosRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/analisis': typeof AnalisisRoute
+  '/conclusiones': typeof ConclusionesRoute
+  '/marco-normativo': typeof MarcoNormativoRoute
+  '/metodologia': typeof MetodologiaRoute
+  '/resultados': typeof ResultadosRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/analisis': typeof AnalisisRoute
+  '/conclusiones': typeof ConclusionesRoute
+  '/marco-normativo': typeof MarcoNormativoRoute
+  '/metodologia': typeof MetodologiaRoute
+  '/resultados': typeof ResultadosRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/analisis'
+    | '/conclusiones'
+    | '/marco-normativo'
+    | '/metodologia'
+    | '/resultados'
+    | '/sitemap.xml'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/analisis'
+    | '/conclusiones'
+    | '/marco-normativo'
+    | '/metodologia'
+    | '/resultados'
+    | '/sitemap.xml'
+  id:
+    | '__root__'
+    | '/'
+    | '/analisis'
+    | '/conclusiones'
+    | '/marco-normativo'
+    | '/metodologia'
+    | '/resultados'
+    | '/sitemap.xml'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AnalisisRoute: typeof AnalisisRoute
+  ConclusionesRoute: typeof ConclusionesRoute
+  MarcoNormativoRoute: typeof MarcoNormativoRoute
+  MetodologiaRoute: typeof MetodologiaRoute
+  ResultadosRoute: typeof ResultadosRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resultados': {
+      id: '/resultados'
+      path: '/resultados'
+      fullPath: '/resultados'
+      preLoaderRoute: typeof ResultadosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/metodologia': {
+      id: '/metodologia'
+      path: '/metodologia'
+      fullPath: '/metodologia'
+      preLoaderRoute: typeof MetodologiaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marco-normativo': {
+      id: '/marco-normativo'
+      path: '/marco-normativo'
+      fullPath: '/marco-normativo'
+      preLoaderRoute: typeof MarcoNormativoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/conclusiones': {
+      id: '/conclusiones'
+      path: '/conclusiones'
+      fullPath: '/conclusiones'
+      preLoaderRoute: typeof ConclusionesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/analisis': {
+      id: '/analisis'
+      path: '/analisis'
+      fullPath: '/analisis'
+      preLoaderRoute: typeof AnalisisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +177,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AnalisisRoute: AnalisisRoute,
+  ConclusionesRoute: ConclusionesRoute,
+  MarcoNormativoRoute: MarcoNormativoRoute,
+  MetodologiaRoute: MetodologiaRoute,
+  ResultadosRoute: ResultadosRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
