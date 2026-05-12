@@ -86,7 +86,7 @@ export function SiteLayout({ children }: { children?: React.ReactNode }) {
       </header>
 
       <main className="flex-1">
-        <Outlet />
+        {children ?? <Outlet />}
       </main>
 
       <footer className="bg-primary text-primary-foreground/90 mt-20">
