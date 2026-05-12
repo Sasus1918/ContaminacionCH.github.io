@@ -123,44 +123,26 @@ function Index() {
               El Nivel de Presión Sonora Continuo Equivalente con ponderación A se calcula
               mediante integración logarítmica de la presión sonora instantánea:
             </p>
-            <div className="overflow-x-auto py-4">
-              <math
-                xmlns="http://www.w3.org/1998/Math/MathML"
-                display="block"
-                style={{ fontSize: "1.6rem" }}
-              >
-                <mrow>
-                  <msub>
-                    <mi>L</mi>
-                    <mrow><mi>A</mi><mi>e</mi><mi>q</mi><mo>,</mo><mi>T</mi></mrow>
-                  </msub>
-                  <mo>=</mo>
-                  <mn>10</mn>
-                  <mo>·</mo>
-                  <msub><mi>log</mi><mn>10</mn></msub>
-                  <mo>(</mo>
-                  <mfrac>
-                    <mn>1</mn>
-                    <mi>T</mi>
-                  </mfrac>
-                  <msubsup>
-                    <mo>∫</mo>
-                    <mn>0</mn>
-                    <mi>T</mi>
-                  </msubsup>
-                  <mfrac>
-                    <msup>
-                      <mrow><msub><mi>p</mi><mi>A</mi></msub><mo>(</mo><mi>t</mi><mo>)</mo></mrow>
-                      <mn>2</mn>
-                    </msup>
-                    <msup><msub><mi>p</mi><mn>0</mn></msub><mn>2</mn></msup>
-                  </mfrac>
-                  <mi>d</mi><mi>t</mi>
-                  <mo>)</mo>
-                  <mtext>&nbsp;dBA</mtext>
-                </mrow>
-              </math>
-            </div>
+            <div
+              className="overflow-x-auto py-4 text-2xl"
+              dangerouslySetInnerHTML={{
+                __html: `
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block" style="font-size:1.6rem">
+  <mrow>
+    <msub><mi>L</mi><mrow><mi>A</mi><mi>e</mi><mi>q</mi><mo>,</mo><mi>T</mi></mrow></msub>
+    <mo>=</mo><mn>10</mn><mo>·</mo><msub><mi>log</mi><mn>10</mn></msub><mo>(</mo>
+    <mfrac><mn>1</mn><mi>T</mi></mfrac>
+    <msubsup><mo>∫</mo><mn>0</mn><mi>T</mi></msubsup>
+    <mfrac>
+      <msup><mrow><msub><mi>p</mi><mi>A</mi></msub><mo>(</mo><mi>t</mi><mo>)</mo></mrow><mn>2</mn></msup>
+      <msup><msub><mi>p</mi><mn>0</mn></msub><mn>2</mn></msup>
+    </mfrac>
+    <mi>d</mi><mi>t</mi><mo>)</mo><mtext> dBA</mtext>
+  </mrow>
+</math>`,
+              }}
+            />
+
             <div className="mt-6 grid gap-3 sm:grid-cols-2 text-sm text-muted-foreground">
               <div><strong className="text-foreground">p<sub>A</sub>(t):</strong> presión sonora ponderada A</div>
               <div><strong className="text-foreground">p<sub>0</sub>:</strong> presión de referencia (20 µPa)</div>
